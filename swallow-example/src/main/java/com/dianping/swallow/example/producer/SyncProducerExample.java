@@ -14,12 +14,16 @@ public class SyncProducerExample {
     public static void main(String[] args) throws Exception {
         ProducerConfig config = new ProducerConfig();
         config.setMode(ProducerMode.SYNC_MODE);
-        Producer p = ProducerFactoryImpl.getInstance().createProducer(Destination.topic("example"), config);
-        for (int i = 0; i < 10; i++) {
+        Producer p = ProducerFactoryImpl.getInstance().createProducer(Destination.topic("example2"), config);
+        for (int i = 0; i < Integer.MAX_VALUE; i++) {
             String msg = SyncProducerExample.class.getSimpleName() + ": 消息-" + i;
+            try{
             p.sendMessage(msg);
             System.out.println("Sended msg:" + msg);
             Thread.sleep(500);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         }
     }
 
