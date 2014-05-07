@@ -38,7 +38,7 @@ public class MongoClient implements ConfigChangeListener {
    private static final String           MONGO_CONFIG_FILENAME                             = "swallow-mongo.properties";
    private static final String           LION_CONFIG_FILENAME                              = "swallow-mongo-lion.properties";
    private static final String           DEFAULT_COLLECTION_NAME                           = "c";
-   private static final String           TOPICNAME_HEARTBEAT                               = "heartbeat";
+//   private static final String           TOPICNAME_HEARTBEAT                               = "heartbeat";
    private static final String           TOPICNAME_DEFAULT                                 = "default";
 
    private static final String           LION_KEY_MSG_CAPPED_COLLECTION_SIZE               = "swallow.mongo.msgCappedCollectionSize";
@@ -513,7 +513,8 @@ public class MongoClient implements ConfigChangeListener {
 
    public DBCollection getHeartbeatCollection(String ip) {
       //根据topicName获取Mongo实例
-      Mongo mongo = getMongo(TOPICNAME_HEARTBEAT);
+//      Mongo mongo = getMongo(TOPICNAME_HEARTBEAT);
+      Mongo mongo = this.heartbeatMongo;
       return this.getCollection(mongo, this.heartbeatCappedCollectionSize, this.heartbeatCappedCollectionMaxDocNum,
             "heartbeat#" + ip, new BasicDBObject(HeartbeatDAOImpl.TICK, -1));
    }
